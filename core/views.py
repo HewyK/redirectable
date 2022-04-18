@@ -7,9 +7,17 @@ from django.contrib import messages
 from core.models import *
 from core.forms import *
 
+####################################################################
+# Unauthenticated Views
+####################################################################
 
 class HomeView(TemplateView):
     template_name = 'index.html'
+
+
+####################################################################
+# Authenticated Views
+####################################################################
 
 class DashboardView(TemplateView):
     template_name = 'dashboard.html'
@@ -37,9 +45,29 @@ class DashboardView(TemplateView):
             messages.add_message(self.request, messages.INFO, 'Added Successfully')
         else:
             print('invalid form')
-            messages.add_message(self.request, messages.ERROR, 'Error adding redirect')
+            messages.add_message(self.request, messages.ERROR, 'Error Adding Redirect')
 
         return HttpResponseRedirect(self.request.META.get('HTTP_REFERER', '/'))
+
+
+def DeleteRedirectView(request, **kwargs):
+
+    if kwargs['r']:
+
+        redirect_to_delete = get_object_or_404(Redirects, id=kwargs['r'])
+        print('Deleting Redirect: ', redirect_to_delete)
+
+        redirect_to_delete.delete()
+        messages.add_message(request, messages.INFO, 'Deleted Successfully')
+
+    else:
+        messages.add_message(request, messages.ERROR, 'Error Deleting redirect')
+
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+####################################################################
+# Redirect Views
+####################################################################
 
 def redirect_url(request):
 
@@ -51,3 +79,4 @@ def redirect_url(request):
     response = HttpResponse("", status=302)
     response['Location'] = str(redirect_obj.http_https) + '://' + str(redirect_obj.url_to)
     return response
+

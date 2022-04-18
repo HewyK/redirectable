@@ -1,0 +1,21 @@
+<nav id="navbar" class="navbar">
+    <ul>
+
+      <li><a class="nav-link scrollto" href="/">Home</a></li>
+      <li><a class="nav-link scrollto" href="/#about">About</a></li>
+      <li><a class="nav-link scrollto" href="/#services">Services</a></li>
+      <li><a class="nav-link scrollto" href="/#contact">Contact</a></li>
+      {% if user.is_authenticated %}
+      <li><a class="nav-link scrollto" href="/dashboard">Dashboard</a></li>
+      <li><a class="nav-link scrollto" href="/profile">Profile</a></li>
+      <a class="btn-getstarted scrollto" href="/accounts/logout">Logout</a>
+      {% else %}
+      <li><a style="color: #0EA3BD;" href="/accounts/signup">Signup</a></li>
+      <li><a class="btn-getstarted scrollto" href="/accounts/login">Login</a></li>
+      {% endif %}
+    </ul>
+    <i class="bi bi-list mobile-nav-toggle d-none"></i>
+
+
+
+  </nav>

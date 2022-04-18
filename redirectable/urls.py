@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
 from django.urls import path, include
 from core.views import *
 
@@ -24,4 +25,5 @@ urlpatterns = [
     path('', HomeView.as_view()),
     path('dashboard', DashboardView.as_view(), name='dashboard'),
     path('redirect', redirect_url),
+    path('delete/<int:r>', login_required(DeleteRedirectView), name='delete')
 ]

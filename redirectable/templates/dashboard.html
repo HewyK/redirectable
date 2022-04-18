@@ -5,13 +5,19 @@
 {% endblock %}
 {% block content %}
 
-<div class="row mt-4 align-items-center">
+<div class="row mt-4">
+    <div class="col-lg-12">
+        <h5 style="color: #0EA3BD;">How To</h5>
+        <p>Add redirects using the functionality below, then create a DNS "A Record" pointing to the IP address <strong>1.2.3.4</strong></p>
+        <p>Once setup correctly, any requests going to the A record (which should be the value in the "Redirect From" field below) will then be automatically redirected to the URL in the "To" field</p>
+    </div>
+</div>
+
+<div class="row mt-4">
     <div class="col-lg-12">
         <form action="" method="post">
             {% csrf_token %}
-            <h2>Dashboard</h2>
-            <br /><br />
-            <h5>Add New Redirect</h5><br />
+            <h5 style="color: #0EA3BD;">Add New Redirect</h5>
             <div class="row">
                 <div class="col-lg-4">
                     <label>Redirect From</label>
@@ -31,18 +37,34 @@
         </form>
     </div>
 </div>
-
+<br>
 <div class="row mt-4">
+    <div class="col-lg-12">
     {% if redirects %}
-    <h5>Redirects</h5><br />
-    {% for r in redirects %}
-        <div class="row">
-            <div class="col-lg-12">
-                Redirect from: {{r.url_from}} to: {{r.http_https}}://{{r.url_to}}
-            </div>
-        </div>
-    {% endfor %}
-{% endif %}
+        <h5 style="color: #0EA3BD;">Active Redirects</h5>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Redirect From</th>
+                <th scope="col">Using</th>
+                <th scope="col">To</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+
+        {% for r in redirects %}
+            <tr>
+                <th>{{r.url_from}}</th>
+                <td>{{r.http_https}}</td>
+                <td>{{r.url_to}}</td>
+                <td><a href="delete/{{r.id}}">Delete</a></td>
+        </tr>
+        {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    </div>
 </div>
 
 {% endblock %}

@@ -1,0 +1,11 @@
+django
+django-debug-toolbar
+django-allauth
+django-environ
+gunicorn
+whitenoise
+django-heroku
+dj-database-url
+psycopg2
+django-taggit
+django-widget-tweaks

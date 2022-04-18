@@ -61,7 +61,7 @@ class Redirects(models.Model):
         db = 'default'
     id = models.AutoField(
         db_column='id', primary_key=True)
-    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE, related_name='user_redirects')
+    user = models.ForeignKey(User, null=False, on_delete=models.CASCADE, related_name='user_redirects')
     timestamp = models.DateTimeField(default=timezone.now)
     url_from = models.CharField(max_length=512, null=False)
     url_to = models.CharField(max_length=512, null=False)

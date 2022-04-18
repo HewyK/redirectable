@@ -2,7 +2,10 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.views.generic import TemplateView
 from django.http import HttpResponseRedirect, HttpResponse
 from urllib.request import urlopen
+from django.contrib import messages
+
 from core.models import *
+from core.forms import *
 
 
 class HomeView(TemplateView):
@@ -10,6 +13,33 @@ class HomeView(TemplateView):
 
 class DashboardView(TemplateView):
     template_name = 'dashboard.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        redirects = Redirects.objects.filter(user=self.request.user)
+
+        context['redirects'] = redirects
+        context['form'] = RedirectsForm(initial={'http_https': 'https'})
+        return context
+
+    def post(self, request, *args, **kwargs):
+
+        form = RedirectsForm(request.POST)
+
+        if form.is_valid():
+            print('valid form')
+            r = Redirects()
+            r.user = self.request.user
+            r.url_from = form.cleaned_data['url_from']
+            r.url_to = form.cleaned_data['url_to']
+            r.http_https = form.cleaned_data['http_https']
+            r.save()
+            messages.add_message(self.request, messages.INFO, 'Added Successfully')
+        else:
+            print('invalid form')
+            messages.add_message(self.request, messages.ERROR, 'Error adding redirect')
+
+        return HttpResponseRedirect(self.request.META.get('HTTP_REFERER', '/'))
 
 def redirect_url(request):
 

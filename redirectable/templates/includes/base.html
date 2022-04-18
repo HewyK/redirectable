@@ -131,6 +131,34 @@
 
   <main id="main">
 
+    {% if messages %}
+    <!-- ======= Messages ======= -->
+    <div class="breadcrumbs">
+    <div class="container mt-6">
+    {% for message in messages %}
+      {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+          <div class="alert alert-alert alert-dismissible fade show" role="alert">
+            <strong>Important: </strong>
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+      {% else %}
+          <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            <strong>Message: </strong>
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+      {% endif %}
+    {% endfor %}
+    </div></div>
+    <!-- End Messages -->
+    {% endif %}
+
+
     <!-- ======= Content Section ======= -->
     <section class="inner-page">
       <div class="container" data-aos="fade-up">

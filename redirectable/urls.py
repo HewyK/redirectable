@@ -23,7 +23,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
 
     path('', HomeView.as_view()),
-    path('dashboard', DashboardView.as_view(), name='dashboard'),
     path('redirect', redirect_url),
+    path('dashboard', login_required(DashboardView.as_view()), name='dashboard'),
     path('delete/<int:r>', login_required(DeleteRedirectView), name='delete')
 ]

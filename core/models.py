@@ -5,7 +5,7 @@ from django.db.models.fields import CharField, TextField
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils import timezone, tree
-from psycopg2 import Timestamp
+# from psycopg2 import Timestamp
 from taggit.managers import TaggableManager
 from django.db import models
 

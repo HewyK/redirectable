@@ -1,0 +1,4 @@
+to install psycopg2 on Apple silicon:
+
+pip install psycopg2-binary --force-reinstall --no-cache-dir
+

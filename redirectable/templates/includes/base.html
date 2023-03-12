@@ -75,7 +75,7 @@
 
     {% if messages %}
     <!-- ======= Messages ======= -->
-    <div class="container pt-5 mt-5 mb-0 pb-0">
+    <div class="container pt-5 mt-5 mb-0 pb-0" id="messagesContainer">
     {% for message in messages %}
       {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
         <div class="alert alert-alert alert-dismissible fade show" role="alert">

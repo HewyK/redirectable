@@ -1,0 +1,34 @@
+<!-- Modal -->
+<div class="modal fade" id="addSSLModal" tabindex="-1" aria-labelledby="addSSLModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel" style="color: #0EA3BD;">Add SSL</h5>
+        </div>
+        <div class="modal-body">
+            <p>To add a Lets Encrypt SSL certificate to your redirect, follow the instructions below.</p>
+            <br>
+            <h5 style="color: #0EA3BD;">Step 1 - Allow Lets Encrypt to validate domain ownership</h5>
+            <p style="color: red;">Before progressing, ensure your domain is pointing to the redirect correctly.</p>
+
+            <p>Now open Lets Encrypt in the command line and run the command below:</p>
+
+            {{sslsetupform.as_p}}
+            <p>Now take the code from the url and enter it in the box below:</p>
+
+            <p>And enter the content code in the box below then hit "Confirm":</p>
+
+            <button type="button" class="btn btn-primary">Confirm</button>
+            <br><br>
+            <h5 style="color: #0EA3BD;">Step 2 - Upload the Lets Encrypt SSL Certificate</h5>
+            <p>Once you have clicked confirm above, click enter in the command line to complete the Lets Encrypt process</p>
+
+            <p>At this point, Lets Encrypt should have provided you with the required certificates. Use the upload button below to upload the correct certificate file to your redirect then hit "Save".</p>
+            {{sslcertuploadform.as_p}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

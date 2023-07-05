@@ -66,6 +66,10 @@ class Redirects(models.Model):
     url_from = models.CharField(max_length=512, null=False)
     url_to = models.CharField(max_length=512, null=False)
     http_https = models.CharField(max_length=5, null=False, choices=HTTP_CHOICES)
+    le_url = models.CharField(max_length=512, null=True) # lets encrypt ssl url
+    le_body = models.CharField(max_length=512, null=True) # lets encrypt ssl body
+    le_cert = models.FileField(max_length=512, null=True) # lets encrypt ssl cert
+
 
     def __str__(self):
         return self.url_to

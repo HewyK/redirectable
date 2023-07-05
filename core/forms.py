@@ -47,3 +47,24 @@ class RedirectsForm(ModelForm):
         model = Redirects
         fields = ('url_from', 'url_to', 'http_https',)
 
+
+class SSLSetupForm(forms.Form):
+
+    le_url = forms.CharField(
+        label='Lets Encrypt Verification URL',
+        required=True,
+        widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'hodsfybcdsklfsdfhiggwieryb73bkbfutf_03V-A'})
+    )
+    le_content = forms.CharField(
+        label='Lets Encrypt Verification Content',
+        required=True,
+        widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'hodsfybcdsklfsdfhiggwieryb73bkbfutf_03V-A.-nsdfuigob8968574sdfkdfhb23'})
+    )
+
+class SSLCertUploadForm(forms.Form):
+
+    le_ssl_cert = forms.FileField(
+        label='Lets Encrypt SSL Cert',
+        required=True,
+        widget = forms.FileInput(attrs={'class': 'form-control', 'placeholder': 'hodsfybcdsklfsdfhiggwieryb73bkbfutf_03V-A.-nsdfuigob8968574sdfkdfhb23'})
+    )

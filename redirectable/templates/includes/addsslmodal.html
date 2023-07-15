@@ -12,11 +12,12 @@
             <p style="color: red;">Before progressing, ensure your domain is pointing to the redirect correctly.</p>
 
             <p>Now open Lets Encrypt in the command line and run the command below:</p>
+            <strong>sudo certbot certonly --email hello@redirectable.co -d redirectable.co --agree-tos --manual</strong>
+            <br><br>
+
+            <p>Once you have run the command above, Lets Encrypt will provide you with codes to enter in the boxes below:</p>
 
             {{sslsetupform.as_p}}
-            <p>Now take the code from the url and enter it in the box below:</p>
-
-            <p>And enter the content code in the box below then hit "Confirm":</p>
 
             <button type="button" class="btn btn-primary">Confirm</button>
             <br><br>

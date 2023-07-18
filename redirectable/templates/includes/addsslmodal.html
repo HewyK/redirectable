@@ -25,7 +25,15 @@
             <p>Once you have clicked confirm above, click enter in the command line to complete the Lets Encrypt process</p>
 
             <p>At this point, Lets Encrypt should have provided you with the required certificates. Use the upload button below to upload the correct certificate file to your redirect then hit "Save".</p>
-            {{sslcertuploadform.as_p}}
+            <form class="" action="/uploadsslcert/" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              <p>
+                <label for="id_le_cert">Lets Encrypt SSL Cert:</label>
+                <input type="file" name="le_cert" class="form-control" placeholder="sslcert.cert" required="" id="id_le_cert">
+                <input type="hidden" name="redirect_id" value="9"> <!-- TODO: This needs to be populated with the ID for the row -->
+              </p>
+              <input type="submit" class="btn btn-primary" value="Upload">
+            </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>

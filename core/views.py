@@ -130,3 +130,35 @@ def redirect_url(request):
     response = HttpResponse("", status=302)
     response['Location'] = str(redirect_obj.http_https) + '://' + str(redirect_obj.url_to)
     return response
+
+
+####################################################################
+# File Upload Views
+####################################################################
+def upload_ssl_cert(request):
+    """
+    View to upload an SSL Certificate
+
+    Args:
+        request (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
+    if request.method == 'POST':
+        form = forms.SSLCertUploadForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            print('valid form')
+            # TODO: save ssl cert in model against redirect
+            redirect = models.Redirects.objects.get(id=form.cleaned_data['redirect_id'])
+            redirect.le_cert = form.cleaned_data['le_cert']
+            redirect.save()
+            # form.save()
+            messages.add_message(request, messages.INFO, 'SSL Certificate Added Successfully')
+        else:
+            print('invalid form')
+            print(form.errors)
+            messages.add_message(request, messages.ERROR, 'Error Adding Redirect')
+
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))

@@ -16,7 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+
 from core.views import *
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,5 +29,9 @@ urlpatterns = [
     path('', HomeView.as_view()),
     path('redirect', redirect_url),
     path('dashboard/', login_required(DashboardView.as_view()), name='dashboard'),
-    path('delete/<int:r>', login_required(DeleteRedirectView), name='delete')
+    path('delete/<int:r>', login_required(DeleteRedirectView), name='delete'),
+    path('uploadsslcert/', login_required(upload_ssl_cert), name='uploadsslcert'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

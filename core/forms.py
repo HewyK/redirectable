@@ -61,10 +61,18 @@ class SSLSetupForm(forms.Form):
         widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'hodsfybcdsklfsdfhiggwieryb73bkbfutf_03V-A.-nsdfuigob8968574sdfkdfhb23'})
     )
 
-class SSLCertUploadForm(forms.Form):
+class SSLCertUploadForm(ModelForm):
 
-    le_ssl_cert = forms.FileField(
+    le_cert = forms.FileField(
         label='Lets Encrypt SSL Cert',
         required=True,
-        widget = forms.FileInput(attrs={'class': 'form-control', 'placeholder': 'hodsfybcdsklfsdfhiggwieryb73bkbfutf_03V-A.-nsdfuigob8968574sdfkdfhb23'})
+        widget = forms.FileInput(attrs={'class': 'form-control', 'placeholder': 'sslcert.cert'})
     )
+    redirect_id = forms.CharField(
+        required=True,
+        widget = forms.HiddenInput()
+    )
+
+    class Meta:
+        model = Redirects
+        fields = ('le_cert',)
